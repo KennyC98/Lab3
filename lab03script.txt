@@ -1,0 +1,117 @@
+Script started on 2019-03-13 21:54:29-07:00
+]0;kvchhoeun@costello:~/cs2560/cs2560_lab03[01;32mkvchhoeun@costello[01;34m ~/cs2560/cs2560_lab03 $[00m ls -l
+total 20
+-rw------- 1 kvchhoeun cpp   395 Mar 13 21:49 Triangle.cpp
+-rw------- 1 kvchhoeun cpp   224 Mar 13 21:25 Triangle.h
+-rwx--x--x 1 kvchhoeun cpp 13960 Mar 13 21:51 [0m[01;32mlab03[0m
+-rw------- 1 kvchhoeun cpp  1006 Mar 13 21:47 lab03.cpp
+-rw------- 1 kvchhoeun cpp     0 Mar 13 21:54 [00;32mlab03script.txt[0m
+-rw------- 1 kvchhoeun cpp    69 Mar 13 21:29 triangles.dat
+]0;kvchhoeun@costello:~/cs2560/cs2560_lab03[01;32mkvchhoeun@costello[01;34m ~/cs2560/cs2560_lab03 $[00m cat triangles.dat 
+15.0 4.0
+6.0 9.0
+3.0 4.0
+5.23 8.45
+52.36 84.78
+21.24 24.24
+3.25 1.24
+]0;kvchhoeun@costello:~/cs2560/cs2560_lab03[01;32mkvchhoeun@costello[01;34m ~/cs2560/cs2560_lab03 $[00m cat triangles.dat [K[K[K[K[K[K[K[K[K[K[K[K[K[KTriangle.h
+// Triangle.h
+#ifndef TRIANGLE_H
+#define TRIANGLE_H
+
+class Triangle {
+   public:
+      Triangle(float base, float height);
+
+      float area();
+   private:
+      float base_;
+      float height_;
+};
+
+#endif /* TRIANGLE_H */
+]0;kvchhoeun@costello:~/cs2560/cs2560_lab03[01;32mkvchhoeun@costello[01;34m ~/cs2560/cs2560_lab03 $[00m cat Triangle.cpp
+#include "Triangle.h"
+#include <iostream>
+
+using namespace std;
+short counter = 1;
+Triangle::Triangle(float base, float height){
+        base_ = base;
+        height_ = height;
+        cout <<"Triangle " << counter <<": b="<< base <<", h=" << height << ", area=" << area() << endl;
+        counter++;
+}
+
+float Triangle::area(){
+         float area = (0.5*base_*height_);
+         return area;
+}
+]0;kvchhoeun@costello:~/cs2560/cs2560_lab03[01;32mkvchhoeun@costello[01;34m ~/cs2560/cs2560_lab03 $[00m cat T[Klab03.cpp
+//Kenny Chhoeun
+//Partner: Yash Bhure, Rigoberto Canales Maldonado
+//Date: March 13, 2019
+//Lab 3
+//Calculate area of triangle from data from "triangles.dat"
+
+#include <iostream>
+#include "Triangle.h"
+#include "Triangle.cpp"
+#include <fstream>// in order to input/output file
+using namespace std;
+
+//global var
+//short counter = 1;
+float base;
+float height;
+
+/*float area()
+{
+   float area = 0.5*base*height;
+   return area;
+}
+
+float Triangle(float base, float height)  //definition of Triangle function
+{
+   cout <<"Triangle " << counter <<": b="<< base <<", h=" << height << ", area=" << area() << endl;
+   counter++;
+   return 0;
+}*/
+
+int main()
+{
+   ifstream inputFile;
+   inputFile.open("triangles.dat");
+   //open the input file
+
+   if(inputFile.fail())
+   {
+      cout << "Input File\"triangles.dat\" not found\n";
+      return -1;
+   }
+   else
+   {
+      while(inputFile >> base >> height)
+      {
+         Triangle(base, height);
+      }
+   }
+
+   //Close the input File//
+   inputFile.close();
+}
+
+]0;kvchhoeun@costello:~/cs2560/cs2560_lab03[01;32mkvchhoeun@costello[01;34m ~/cs2560/cs2560_lab03 $[00m g++ -Wall -std=c++11 -o lab03 lab03.cpp
+]0;kvchhoeun@costello:~/cs2560/cs2560_lab03[01;32mkvchhoeun@costello[01;34m ~/cs2560/cs2560_lab03 $[00m ./lab03 
+Triangle 1: b=15, h=4, area=30
+Triangle 2: b=6, h=9, area=27
+Triangle 3: b=3, h=4, area=6
+Triangle 4: b=5.23, h=8.45, area=22.0968
+Triangle 5: b=52.36, h=84.78, area=2219.54
+Triangle 6: b=21.24, h=24.24, area=257.429
+Triangle 7: b=3.25, h=1.24, area=2.015
+]0;kvchhoeun@costello:~/cs2560/cs2560_lab03[01;32mkvchhoeun@costello[01;34m ~/cs2560/cs2560_lab03 $[00m exit
+exit
+
+Script done on 2019-03-13 21:55:35-07:00
